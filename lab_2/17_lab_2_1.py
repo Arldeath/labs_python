@@ -1,74 +1,73 @@
-keyslist = ["умм", "аксим", "иним"]
-funclist = [sum, max, min]
-funcdict = dict(map(lambda *args: args, keyslist, funclist)) 
+list_of_keys = ["умм", "аксим", "иним"]
+funcdict = dict(map(lambda *args: args, list_of_keys, [sum, max, min])) 
 print("""Здравствуйте!
 Рекомендация вводить запрос по типу:
-*Действие в последовательности данных в диапазоне.*
-Например:
-Максимум в массиве (2, 6, 90, -1, -23, 324, -3124, 5) с 3 элемента по 7.
+*Действие в последовательности данных в диапазоне от до.*
+Например, *Максимум в массиве (2, 6, 90, -1, -23, 324, -3124, 5) с 3 элемента по 7.*
 В противном случае вы можете получить не то, что нужно.
-Чтобы выйти из программы напишите 'q.'
+Чтобы выйти из программы напишите 'q'.
 Введите ваш запрос:)""")
 request = ''
 while True:
     request = input()  
     if request == 'q':
         break
-    A = list(request)
-    if A[-1].isdigit():
-        A.append('.')
+    request_into_char = list(request)
+    if request_into_char[-1].isdigit():
+        request_into_char.append('.')
         print("Фи, предложение без точки :(")
-    b, counter = [], 0
-    mylen, i = len(A), 0
-    while i < mylen:
-        if A[i] == '-':
-            temp = "-"
+    list_of_numbers = []
+    len_of_request, i = len(request_into_char), 0
+    while i < len_of_request:
+        if request_into_char[i] == '-':
+            temp_str = "-"
             i += 1
         else:
-            temp = ""
-        while A[i].isdigit():
-            temp = temp + A[i]
+            temp_str = ""
+        while request_into_char[i].isdigit():
+            temp_str = temp_str + request_into_char[i]
             i += 1
-        if temp:
-            b.append(''.join(temp))
+        if temp_str:
+            list_of_numbers.append(''.join(temp_str))
         i += 1
-    mylen = len(b)
+    len_of_list = len(list_of_numbers)
     i = 0
-    while i < mylen:
-        b[i]=int(b[i])
+    while i < len_of_list:
+        list_of_numbers[i]=int(list_of_numbers[i])
         i += 1
-    begin, end, counter = b.pop(-2)-1, b.pop(-1)-1, len(b)
-    bool1 = end>begin and begin>0
-    if bool1 and counter>end:
+    end, begin = list_of_numbers.pop(-1)-1, list_of_numbers.pop(-1)-1
+    len_of_list = len(list_of_numbers) 
+    correct_borders = end>begin and begin>0
+    if correct_borders and len_of_list>end:
         usesfunc = None
-        for key in keyslist:
+        for key in list_of_keys:
             if request.find(key) + 1:
                 usesfunc = funcdict[key]
         if usesfunc is None:
             print("Ваш запрос некорректный, попробуйте ещё.")
         else:
-            counter = end-begin+1
-            if counter % counter**0.5 == 0:
-                mylen = int(counter**0.5)
-                bool2 = False
+            len_of_realrange = end-begin+1
+            if len_of_realrange % len_of_realrange**0.5 == 0:
+                rangelen = int(len_of_realrange**0.5)
+                sqrt_is_int = False
             else:
-                mylen = int(counter**0.5) + 1
-                bool2 = True
-            mylist = []
-            if bool2:
-                temp2 = end
-                end -= mylen
+                rangelen = int(len_of_realrange**0.5) + 1
+                sqrt_is_int = True
+            realrange = []
+            if sqrt_is_int:
+                rangeend = end
+                end -= rangelen
                 while begin < end:
-                    mylist.append(b[begin:begin+mylen])
-                    begin += mylen
-                mylist.append(b[begin:temp2])    
+                    realrange.append(list_of_numbers[begin:begin+rangelen])
+                    begin += rangelen
+                realrange.append(list_of_numbers[begin:rangeend])    
             else:    
                 while begin < end:
-                    mylist.append(b[begin:begin+mylen])
-                    begin += mylen
-            temp = []
-            for elem in mylist:
-                temp.append(usesfunc(elem))
-            print(usesfunc(temp))
+                    realrange.append(list_of_numbers[begin:begin+rangelen])
+                    begin += rangelen
+            list_of_temp_result = []
+            for elem in realrange:
+                list_of_temp_result.append(usesfunc(elem))
+            print("Ваше число "+str(usesfunc(list_of_temp_result))+'.')
     else:
         print("Ваш запрос некорректный, попробуйте ещё.")
