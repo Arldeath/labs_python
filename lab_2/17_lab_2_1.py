@@ -1,17 +1,22 @@
 list_of_keys = ["умм", "аксим", "иним"]
 funcdict = dict(map(lambda *args: args, list_of_keys, [sum, max, min])) 
-print("""Здравствуйте!
+print(r"""Здравствуйте!
+Если вы хотите ввести данные с файла, то пропишите -f <путь>,
+Например *-f e:\git-repository\labs_python\lab_2\test.txt*.
 Рекомендация вводить запрос по типу:
-*Действие в последовательности данных в диапазоне от до.*
+*Действие в последовательности данных в диапазоне от до*.
 Например, *Максимум в массиве (2, 6, 90, -1, -23, 324, -3124, 5) с 3 элемента по 7.*
 В противном случае вы можете получить не то, что нужно.
-Чтобы выйти из программы напишите 'q'.
+Чтобы выйти из программы напишите *-q*.
 Введите ваш запрос:)""")
 request = ''
 while True:
-    request = input()  
-    if request == 'q':
-        break
+    request = input()
+    if request == "-q":
+        break  
+    if request[:2] == "-f":
+        way = request[3:]
+        request = open(way,"rb").read().decode("utf-8")
     request_into_char = list(request)
     if request_into_char[-1].isdigit():
         request_into_char.append('.')
@@ -71,3 +76,4 @@ while True:
             print("Ваше число "+str(usesfunc(list_of_temp_result))+'.')
     else:
         print("Ваш запрос некорректный, попробуйте ещё.")
+    print("Введите ваш запрос:")
