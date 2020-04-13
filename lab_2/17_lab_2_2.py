@@ -1,32 +1,7 @@
-alphabet_keys = list(range(65, 91)) + list(range(97, 123))
-
-it_is_doing = True
-print("""Введите запрос по образцу:
-<имя> <размер в Мб> <диапазон кол-ва строк в строке> <длина слова>
-Наппример, *testname.txt 512 (20, 50) (5, 9)*""")
-request = input().split()
-len_of_request = len(request)
-if len_of_request == 6:
-    K = (int(request[2][1:-1]), int(request[3][0:-1]))
-    L = (int(request[4][1:-1]), int(request[5][0:-1]))
-elif len_of_request == 4:
-    K = (int(request[2][1:-1]), int(request[3][0:-1]))
-    L = (3, 10)
-elif len_of_request == 2:
-    K = (10, 100)
-    L = (3, 10)
-else:
-    print("Вы ввели данные неккоретно")
-    it_is_doing = False
-if it_is_doing:
-    import random as rand
-    Mb = int(request[1])
-    begin_K, end_K = K[0], K[1]
-    begin_L, end_L = L[0], L[1]
-    name = request[0]
-    new_file = open(name, "w")
-    size = 0
-    need_size = Mb*1024*1024
+def junk_file(name, Mb, K=(10,100), L=(3,10)):
+    import random
+    size, need_size = 0, 1024*1024*Mb
+    new_file = open(name, 'w')
     counter_for_description = 0
     while size < need_size:
         counter_of_words = 0
@@ -47,3 +22,31 @@ if it_is_doing:
             print(counter_for_description, end='\r')
             counter_for_description += 1
     new_file.close()
+
+it_is_doing = True
+print("""Введите запрос по образцу:
+<имя> <размер в Мб> <диапазон кол-ва строк в строке> <длина слова>
+Наппример, *testname.txt 512 (20, 50) (5, 9)*""")
+request = input().split()
+len_of_request = len(request)
+if len_of_request == 6:
+    K = (int(request[2][1:-1]), int(request[3][0:-1]))
+    L = (int(request[4][1:-1]), int(request[5][0:-1]))
+elif len_of_request == 4:
+    K = (int(request[2][1:-1]), int(request[3][0:-1]))
+    L = (3, 10)
+elif len_of_request == 2:
+    K = (10, 100)
+    L = (3, 10)
+else:
+    print("Вы ввели данные неккоретно")
+    it_is_doing = False
+if it_is_doing:
+    alphabet_keys = list(range(65, 91)) + list(range(97, 123))
+    import random as rand
+    Mb = int(request[1])
+    begin_K, end_K = K[0], K[1]
+    begin_L, end_L = L[0], L[1]
+    name = request[0]
+    size, need_size = 0, Mb*1024*1024
+    junk_file(name, Mb, (begin_K, end_K), (begin_L, end_L))
