@@ -1,5 +1,5 @@
 list_of_keys = ["умм", "аксим", "иним"]
-funcdict = dict(map(lambda *args: args, list_of_keys, [sum, max, min])) 
+funcdict = {"умм": sum, "аксим": max, "иним": min}
 print(r"""Здравствуйте!
 Если вы хотите ввести данные с файла, то пропишите -f <путь>,
 Например *-f e:\git-repository\labs_python\lab_2\test.txt*.
