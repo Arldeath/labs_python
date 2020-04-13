@@ -1,8 +1,20 @@
-def junk_file(name, Mb, K=(10,100), L=(3,10)):
-    import random
+alphabet_keys = list(range(65, 91)) + list(range(97, 123))
+import argparse as arg
+parser = arg.ArgumentParser()
+parser.add_argument("name", type=str, help="Имя мусорного файла")
+parser.add_argument("Mb", type=int, help="Его размер в Мб")
+parser.add_argument('K', nargs=2, type=int, default=[10, 100])
+parser.add_argument('L', nargs=2, type=int, default=[3, 10])
+args = parser.parse_args()
+map(tuple, [args.K, args.L])
+import random as rand
+
+def junk_file(name:"str", Mb:"int", K:"tuple"=(10,100), L:"tuple"=(3,10))->None:
     size, need_size = 0, 1024*1024*Mb
     new_file = open(name, 'w')
     counter_for_description = 0
+    begin_K, end_K = K[0], K[1]
+    begin_L, end_L = L[0], L[1]
     while size < need_size:
         counter_of_words = 0
         number_of_words = rand.randint(begin_K, end_K)
@@ -23,30 +35,4 @@ def junk_file(name, Mb, K=(10,100), L=(3,10)):
             counter_for_description += 1
     new_file.close()
 
-it_is_doing = True
-print("""Введите запрос по образцу:
-<имя> <размер в Мб> <диапазон кол-ва строк в строке> <длина слова>
-Наппример, *testname.txt 512 (20, 50) (5, 9)*""")
-request = input().split()
-len_of_request = len(request)
-if len_of_request == 6:
-    K = (int(request[2][1:-1]), int(request[3][0:-1]))
-    L = (int(request[4][1:-1]), int(request[5][0:-1]))
-elif len_of_request == 4:
-    K = (int(request[2][1:-1]), int(request[3][0:-1]))
-    L = (3, 10)
-elif len_of_request == 2:
-    K = (10, 100)
-    L = (3, 10)
-else:
-    print("Вы ввели данные неккоретно")
-    it_is_doing = False
-if it_is_doing:
-    alphabet_keys = list(range(65, 91)) + list(range(97, 123))
-    import random as rand
-    Mb = int(request[1])
-    begin_K, end_K = K[0], K[1]
-    begin_L, end_L = L[0], L[1]
-    name = request[0]
-    size, need_size = 0, Mb*1024*1024
-    junk_file(name, Mb, (begin_K, end_K), (begin_L, end_L))
+junk_file(args.name, args.Mb, args.K, args.L)
