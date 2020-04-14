@@ -9,7 +9,8 @@ args = parser.parse_args()
 map(tuple, [args.K, args.L])
 import random as rand
 
-def junk_file(name:"str", Mb:"int", K:"tuple"=(10,100), L:"tuple"=(3,10))->None:
+def junk_file(name:str, Mb:int, K=(10,100), L=(3,10))->None:
+    """This function makes a new file and filled in with characters from the English alphabet"""
     size, need_size = 0, 1024*1024*Mb
     new_file = open(name, 'w')
     counter_for_description = 0
