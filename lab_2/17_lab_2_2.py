@@ -1,4 +1,4 @@
-alphabet_keys = list(range(65, 91)) + list(range(97, 123))
+alphabet_keys = tuple(range(65, 91)) + tuple(range(97, 123))
 import argparse as arg
 parser = arg.ArgumentParser()
 parser.add_argument("name", type=str, help="Имя мусорного файла")
