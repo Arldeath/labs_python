@@ -9,7 +9,6 @@ print(r"""Здравствуйте!
 В противном случае вы можете получить не то, что нужно.
 Чтобы выйти из программы напишите *-q*.
 Введите ваш запрос:)""")
-request = ''
 while True:
     request = input()
     if request == "-q":
@@ -25,10 +24,10 @@ while True:
     len_of_request, i = len(request_into_char), 0
     while i < len_of_request:
         if request_into_char[i] == '-':
-            temp_str = "-"
+            temp_str = '-'
             i += 1
         else:
-            temp_str = ""
+            temp_str = ''
         while request_into_char[i].isdigit():
             temp_str = temp_str + request_into_char[i]
             i += 1
