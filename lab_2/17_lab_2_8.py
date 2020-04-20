@@ -16,8 +16,7 @@ def is_power_two(number:int)->bool:
         print("Не той двойки мы степень проверять должны, ой не той")
     return False
 
-print("Кусь!\nДля проверки напишите число или ждя выхода -q")
-
+print("Кусь!\nДля проверки напишите число или для выхода -q")
 while True:
     request = input()
     if request == "-q":
