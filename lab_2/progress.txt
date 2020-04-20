@@ -4,6 +4,12 @@ Task3
 #! Module
 #! Status
 #! File
+Task7
+#! Задание
+#! Args
+#! Module
+#! Inter
+#! Check
 Task8
 #  Задание
 #  Args
