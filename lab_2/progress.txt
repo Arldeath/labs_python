@@ -5,14 +5,8 @@ Task3
 #! Status
 #! File
 Task7
-#! Задание
-#! Args
-#! Module
-#! Inter
-#! Check
-Task8
 #  Задание
-#  Args
+#! Args
 #  Module
 #  Inter
-#! Check
+#  Check
