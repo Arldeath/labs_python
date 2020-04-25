@@ -13,9 +13,9 @@ def leo_numbers(countt:int, templist=[1,1])->int:
 
 L = [1, 1]
 while True:
-    print("Введите номер числа Леонардо или -q:")
+    print("Введите номер числа Леонардо или -q:", end=' ')
     request = input()
     if request == "-q":
         break
     number = leo_numbers(int(request), L)
-    print(number)
+    print(80*'-', number, 80*'-', sep='\n')
